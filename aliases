@@ -48,8 +48,8 @@ cm () {
   fi
 }
 ca () {
-  if [ -n "$1" ]; then
-    git add $1
+  if [ "$#" -gt 0 ]; then
+    git add $@
   fi
 
   staged_files=$(git status -s | grep "^[MTADRCU]")
