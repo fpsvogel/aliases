@@ -16,9 +16,15 @@ alias gb='git branch'
 alias gbc='git_current_branch | pbcopy'
 # Catch-all for "master", "main", etc.
 main_branch () {
-  echo ${$(git symbolic-ref refs/remotes/origin/HEAD)##*/}
+  if git cat-file -e refs/heads/master 2>&-; then
+    echo "master"
+  elif git cat-file -e refs/heads/main 2>&-; then
+    echo "main"
+  fi
 }
-# or: $(if git cat-file -e refs/heads/master 2>&-; then echo "master"; elif git cat-file -e refs/heads/main 2>&-; then echo "main"; fi)
+# or: echo ${$(git symbolic-ref refs/remotes/origin/HEAD)##*/}
+# but in rare cases doesn't work (e.g. in ~/.oh-my-zsh/custom)
+
 # Delete current branch locally.
 gbd () {
   branch=$(git_current_branch)
