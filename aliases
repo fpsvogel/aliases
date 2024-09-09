@@ -216,6 +216,10 @@ function xt () {
     ;;
   (javascript)
     cd $(ls -td -- */ | head -n 1); pnpm run test; cd -
+    ;;
+  (roc)
+    roc test $(ls -td -- */ | head -n 1)*-test.roc
+    ;;
   esac
 }
 # Submit most recent.
@@ -228,7 +232,10 @@ function xs () {
     exercism submit $(find $(ls -td -- */ | head -n 1 | cut -d"/" -f1) -name "*.rb" ! -name "*_test.rb")
     ;;
   (javascript)
-    exercism submit $(find $(ls -td -- */ | head -n 1 | cut -d"/" -f1) -name "*.js" ! -name "*.spec.js")
+    exercism submit $(find $(ls -td -- */ | head -n 1 | cut -d"/" -f1) -name "*.js" ! -name "*.spec.js" ! -name "*.config.js"  ! -path "*/node_modules/*")
+    ;;
+  (roc)
+    exercism submit $(find $(ls -td -- */ | head -n 1 | cut -d"/" -f1) -name "*.roc" ! -name "*-test.roc")
     ;;
   esac
 }
