@@ -11,7 +11,9 @@ alias ga='git add'
 alias gap='git add --patch'
 alias gau='git add -u'
 # Add all except the file given in the argument.
-alias gax="git add -- . \":!$1\""
+gax() {
+  git add -- . ":!$1"
+}
 alias gb='git branch'
 alias gbc='git_current_branch | pbcopy'
 # Catch-all for "master", "main", etc.
