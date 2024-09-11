@@ -102,7 +102,7 @@ gr () {
     grn $(git rev-list --count HEAD ^$(main_branch))
   fi
 }
-alias grc='git rebase --continue'
+alias grc='git -c core.editor=true rebase --continue' # skips commit message editing
 alias gra='git rebase --abort'
 alias grl='git reflog'
 alias gre='git reset'
